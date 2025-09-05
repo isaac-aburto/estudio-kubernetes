@@ -3,6 +3,6 @@ dist/
 .env
 *.local
 *.retry
-k8s/secrets/*.yaml
+k8s/secrets/backend-secret.yaml
 .kube/
 .minikube/
