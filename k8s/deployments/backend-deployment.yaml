@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: mi-backend:latest
+          env:
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: backend-config
+                key: PORT
+          - name: API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: backend-secret
+                key: API_KEY
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: data-volume
+              mountPath: /app/data
+      volumes:
+      - name: data-volume
+        persistentVolumeClaim:
+          claimName: backend-pvc
+---

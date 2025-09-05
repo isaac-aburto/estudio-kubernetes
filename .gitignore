@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.env
+*.local
+*.retry
+k8s/secrets/*.yaml
+.kube/
+.minikube/
