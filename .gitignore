@@ -4,5 +4,6 @@ dist/
 *.local
 *.retry
 k8s/secrets/backend-secret.yaml
+k8s/argo-deploy/backend-secret.yaml
 .kube/
 .minikube/
